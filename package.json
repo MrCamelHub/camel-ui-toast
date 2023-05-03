@@ -1,8 +1,9 @@
 {
   "name": "camel-ui-toast",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Camel UI Toast Component",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "repository": "https://github.com/MrCamelHub/camel-ui-toast",
   "author": "mrcamel <admin@mrcamel.co.kr>",
   "license": "MIT",
@@ -10,9 +11,17 @@
   "sideEffects": false,
   "keywords": [],
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
+    "@storybook/addon-docs": "^7.0.7",
+    "@storybook/addon-essentials": "^7.0.7",
+    "@storybook/react": "^7.0.7",
+    "@storybook/react-vite": "^7.0.7",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.1",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
     "eslint": "^8.39.0",
@@ -27,6 +36,10 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.0.7",
     "typescript": "^5.0.4",
     "vite": "^4.3.4",
     "vite-plugin-dts": "^2.3.0"
