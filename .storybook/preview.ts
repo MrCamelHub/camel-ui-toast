@@ -12,4 +12,8 @@ const preview: Preview = {
   }
 };
 
+export const argTypes = { darkMode: { control: 'boolean' }, customStyle: { control: false } };
+
+export const args = { darkMode: false };
+
 export default preview;

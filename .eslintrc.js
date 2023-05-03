@@ -70,7 +70,7 @@ module.exports = {
         'newlines-between': 'always'
       }
     ],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: ['vite.config.ts'] }],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'react/require-default-props': 'off',
     'react/jsx-filename-extension': [
       'error',
