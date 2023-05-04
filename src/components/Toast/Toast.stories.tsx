@@ -2,8 +2,7 @@ import { useState } from 'react';
 
 import { Button, ThemeProvider } from 'mrcamel-ui';
 import type { Meta } from '@storybook/react';
-
-import ToastProvider from '../../provider/ToastProvider';
+import ToastProvider from '@provider/ToastProvider';
 
 import Toast from '.';
 
@@ -29,7 +28,7 @@ export function Default({ ...args }) {
       <Button variant="solid" brandColor="primary" onClick={() => setIsOpen(!isOpen)}>
         Open
       </Button>
-      <Toast open={isOpen} onClose={() => setIsOpen(false)} {...args}>
+      <Toast {...args} open={isOpen} onClose={() => setIsOpen(false)}>
         Toast
       </Toast>
     </>

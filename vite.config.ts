@@ -9,14 +9,6 @@ import pkg from './package.json';
 export default defineConfig(({ command }) => {
   if (command === 'serve') {
     return {
-      build: {
-        lib: {
-          entry: 'src/index.ts',
-          name: 'camel-ui-toast',
-          formats: ['cjs', 'es'],
-          fileName: (fileName) => (fileName === 'cjs' ? 'index.js' : 'index.es.js')
-        }
-      },
       resolve: {
         alias: [
           { find: '@', replacement: path.resolve(__dirname, 'src') },
