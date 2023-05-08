@@ -6,6 +6,9 @@
 # dependencies
 /node_modules
 
+# swc
+.swc
+
 # misc
 .DS_Store
 *.pem

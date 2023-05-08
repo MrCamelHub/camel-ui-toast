@@ -2,7 +2,7 @@ import * as path from 'path';
 
 import dts from 'vite-plugin-dts';
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react-swc';
 
 import pkg from './package.json';
 
@@ -46,9 +46,7 @@ export default defineConfig(({ command }) => {
     plugins: [
       react({
         jsxImportSource: '@emotion/react',
-        babel: {
-          plugins: ['@emotion/babel-plugin']
-        }
+        plugins: [['@swc/plugin-emotion', {}]]
       }),
       dts()
     ],
