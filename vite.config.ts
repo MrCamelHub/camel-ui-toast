@@ -42,8 +42,8 @@ export default defineConfig(({ command }) => {
       lib: {
         entry: 'src/index.ts',
         name: 'camel-ui-toast',
-        formats: ['es'],
-        fileName: () => 'index.js'
+        formats: ['cjs', 'es'],
+        fileName: (fileName) => (fileName === 'cjs' ? 'index.js' : 'index.es.js')
       },
       rollupOptions: {
         external: [...Object.keys(pkg.peerDependencies), /@emotion/g],
