@@ -1,57 +1,94 @@
-import type { HTMLAttributes, MouseEvent, PropsWithChildren } from 'react';
-import { forwardRef } from 'react';
+import type { PropsWithChildren } from 'react';
+import { forwardRef, useContext, useEffect, useRef, useState } from 'react';
 
-import { createPortal } from 'react-dom';
-import type { CSSValue, GenericComponentProps } from 'mrcamel-ui';
+import createUniqueId from '@utils/createUniqId';
+import ToastStatesContext from '@context/ToastStatesContext';
 
-import { StyledToast } from './Toast.styles';
+import type { ToastProps } from '@types';
 
-export interface ToastProps
-  extends GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>> {
-  open: boolean;
-  bottom?: CSSValue;
-  edgeSpacing?: number;
-  autoHideDuration?: number;
-  transitionDuration?: number;
-  fullWidth?: boolean;
-  disablePadding?: boolean;
-  onClose?: () => void;
-}
+const Toast = forwardRef<HTMLDivElement, PropsWithChildren<ToastProps>>(function Toast({
+  children,
+  open,
+  bottom = 100,
+  edgeSpacing = 20,
+  autoHideDuration = 2000,
+  transitionDuration = 225,
+  ...props
+}) {
+  const [toastStates = [], setToastStates] = useContext(ToastStatesContext);
 
-const Toast = forwardRef<HTMLDivElement, PropsWithChildren<ToastProps>>(function Toast(
-  {
-    children,
+  const [id, setId] = useState(0);
+  const [hasToastState, setHasToastState] = useState(false);
+
+  const initializedRef = useRef(false);
+
+  useEffect(() => {
+    if (open && !id) setId(createUniqueId(`toast-${toastStates.length}`));
+  }, [open, toastStates, id]);
+
+  useEffect(() => {
+    if (open && setToastStates && id && !initializedRef.current) {
+      initializedRef.current = true;
+      setToastStates((prevState) => {
+        return prevState.concat({
+          id,
+          open: false,
+          close: false,
+          openTimer: setTimeout(
+            () =>
+              setToastStates((prevToastStates) =>
+                prevToastStates.map((prevToastState) => ({
+                  ...prevToastState,
+                  open: prevToastState.id === id ? true : prevToastState.open
+                }))
+              ),
+            transitionDuration
+          ),
+          closeTimer: setTimeout(
+            () =>
+              setToastStates((prevToastStates) =>
+                prevToastStates.map((prevToastState) => ({
+                  ...prevToastState,
+                  close: prevToastState.id === id ? true : prevToastState.close
+                }))
+              ),
+            autoHideDuration
+          ),
+          props: {
+            children,
+            open,
+            bottom,
+            edgeSpacing,
+            autoHideDuration,
+            transitionDuration,
+            ...props
+          }
+        });
+      });
+    }
+  }, [
     open,
-    bottom = '100px',
-    edgeSpacing = 20,
-    transitionDuration = 225,
-    fullWidth,
-    disablePadding,
-    customStyle,
-    ...props
-  },
-  ref
-) {
-  const handleClick = (event: MouseEvent<HTMLDivElement>) => event.stopPropagation();
+    setToastStates,
+    id,
+    autoHideDuration,
+    children,
+    bottom,
+    edgeSpacing,
+    transitionDuration,
+    props
+  ]);
 
-  return createPortal(
-    <StyledToast
-      ref={ref}
-      toastOpen={open}
-      toastClose={!open}
-      bottom={bottom}
-      edgeSpacing={edgeSpacing}
-      transitionDuration={transitionDuration}
-      fullWidth={fullWidth}
-      disablePadding={disablePadding}
-      onClick={handleClick}
-      css={customStyle}
-      {...props}
-    >
-      {children}
-    </StyledToast>,
-    document.body
-  );
+  useEffect(() => {
+    setHasToastState(toastStates.some(({ id: toastStateId }) => toastStateId === id));
+  }, [toastStates, id]);
+
+  useEffect(() => {
+    if (!hasToastState && initializedRef.current) {
+      initializedRef.current = false;
+    }
+  }, [hasToastState]);
+
+  return null;
 });
 
 export default Toast;

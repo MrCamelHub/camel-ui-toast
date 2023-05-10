@@ -1,7 +1,7 @@
-import { convertNumberToCSSValue } from 'mrcamel-ui';
+import { convertNumberToCSSValue } from '@mrcamelhub/camel-ui';
 import styled, { CSSObject } from '@emotion/styled';
 
-import type { ToastProps } from '.';
+import type { ToastProps } from '@types';
 
 export const StyledToast = styled.div<
   Pick<
@@ -10,14 +10,17 @@ export const StyledToast = styled.div<
   > & {
     toastOpen: boolean;
     toastClose: boolean;
+    toastHeight: number;
+    index: number;
   }
 >`
   position: fixed;
   left: 50%;
   bottom: ${({ bottom = 0 }) => convertNumberToCSSValue(bottom)};
-  transform: translateX(-50%);
+  transform: ${({ index, toastHeight }) => `translate(-50%, -${(toastHeight + 8) * index}px)`};
   width: ${({ edgeSpacing }) => `calc(100% - ${(edgeSpacing || 0) * 2}px)`};
   max-width: ${({ fullWidth }) => (fullWidth ? 'auto' : '335px')};
+  max-height: 44px;
   padding: 12px 20px;
   border-radius: 8px;
   background-color: ${({
@@ -36,7 +39,8 @@ export const StyledToast = styled.div<
   visibility: hidden;
   opacity: 0;
   transition: opacity ${({ transitionDuration }) => transitionDuration}ms cubic-bezier(0, 0, 0.2, 1)
-    0ms;
+      0ms,
+    transform ${({ transitionDuration }) => transitionDuration}ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 
   ${({
     theme: {

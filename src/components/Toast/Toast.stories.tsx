@@ -1,36 +1,49 @@
 import { useState } from 'react';
 
-import { Button, ThemeProvider } from 'mrcamel-ui';
 import type { Meta } from '@storybook/react';
-import ToastProvider from '@provider/ToastProvider';
+import { Button, Flexbox } from '@mrcamelhub/camel-ui';
+import Toast from '@components/Toast';
 
-import Toast from '.';
-
-export default {
+const meta: Meta<typeof Toast> = {
   title: 'Toast',
-  component: Toast,
-  decorators: [
-    (Story, { args: { darkMode } }) => (
-      <ThemeProvider theme={darkMode ? 'dark' : 'light'} disableResetCSS={false}>
-        <ToastProvider>
-          <Story />
-        </ToastProvider>
-      </ThemeProvider>
-    )
-  ]
-} as Meta<typeof Toast>;
+  component: Toast
+};
 
 export function Default({ ...args }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [openSecondToast, setOpenSecondToast] = useState(false);
+  const [openThirdToast, setOpenThirdToast] = useState(false);
 
   return (
-    <>
-      <Button variant="solid" brandColor="primary" onClick={() => setIsOpen(!isOpen)}>
-        Open
+    <Flexbox gap={8}>
+      <Button variant="solid" brandColor="primary" onClick={() => setOpen(!open)}>
+        Open First Toast
       </Button>
-      <Toast {...args} open={isOpen} onClose={() => setIsOpen(false)}>
-        Toast
+      <Button
+        variant="solid"
+        brandColor="primary"
+        onClick={() => setOpenSecondToast(!openSecondToast)}
+      >
+        Open Second Toast
+      </Button>
+      <Button
+        variant="solid"
+        brandColor="primary"
+        onClick={() => setOpenThirdToast(!openThirdToast)}
+      >
+        Open Third Toast
+      </Button>
+      <Toast {...args} open={open} onClose={() => setOpen(false)}>
+        First Toast
       </Toast>
-    </>
+      <Toast {...args} open={openSecondToast} onClose={() => setOpenSecondToast(false)}>
+        Second Toast
+      </Toast>
+      <Toast {...args} open={openThirdToast} onClose={() => setOpenThirdToast(false)}>
+        Third Toast
+      </Toast>
+    </Flexbox>
   );
 }
+
+export default meta;

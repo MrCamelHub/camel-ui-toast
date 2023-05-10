@@ -23,18 +23,27 @@ export default defineConfig(({ command }) => {
           {
             find: '@provider',
             replacement: path.resolve(__dirname, 'src/provider')
+          },
+          {
+            find: '@types',
+            replacement: path.resolve(__dirname, 'src/types')
+          },
+          {
+            find: '@utils',
+            replacement: path.resolve(__dirname, 'src/utils')
           }
         ]
       }
     };
   }
+
   return {
     build: {
       lib: {
         entry: 'src/index.ts',
         name: 'camel-ui-toast',
-        formats: ['cjs', 'es'],
-        fileName: (fileName) => (fileName === 'cjs' ? 'index.js' : 'index.es.js')
+        formats: ['es'],
+        fileName: () => 'index.js'
       },
       rollupOptions: {
         external: [...Object.keys(pkg.peerDependencies), /@emotion/g],
@@ -64,6 +73,14 @@ export default defineConfig(({ command }) => {
         {
           find: '@provider',
           replacement: path.resolve(__dirname, 'src/provider')
+        },
+        {
+          find: '@types',
+          replacement: path.resolve(__dirname, 'src/types')
+        },
+        {
+          find: '@utils',
+          replacement: path.resolve(__dirname, 'src/utils')
         }
       ]
     },

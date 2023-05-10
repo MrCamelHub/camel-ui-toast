@@ -8,6 +8,8 @@
       "@context/*": ["./src/context/*"],
       "@provider": ["./src/provider"],
       "@provider/*": ["./src/provider/*"],
+      "@types": ["./src/types"],
+      "@types/*": ["./src/types/*"],
       "@utils": ["./src/utils"],
       "@utils/*": ["./src/utils/*"]
     },
@@ -21,6 +23,8 @@
     "declarationDir": ".",
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
     "jsxImportSource": "@emotion/react"
   },
   "include": [

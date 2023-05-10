@@ -1,12 +1,20 @@
 import type { PropsWithChildren } from 'react';
 import { useState } from 'react';
 
-import ToastTimersContext from '@context/ToastTimersContext';
+import ToastRenderProvider from '@provider/ToastRenderProvider';
+import ToastStatesContext from '@context/ToastStatesContext';
+
+import type { ToastState } from '@types';
 
 function ToastProvider({ children }: PropsWithChildren) {
-  const value = useState([]);
+  const value = useState<ToastState[]>([]);
 
-  return <ToastTimersContext.Provider value={value}>{children}</ToastTimersContext.Provider>;
+  return (
+    <ToastStatesContext.Provider value={value}>
+      {children}
+      <ToastRenderProvider />
+    </ToastStatesContext.Provider>
+  );
 }
 
 export default ToastProvider;
