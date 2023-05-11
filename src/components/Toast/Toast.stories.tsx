@@ -80,9 +80,7 @@ export function Stack() {
       brandColor="primary"
       onClick={() =>
         toastStack({
-          children: 'Toast Stack',
-          // eslint-disable-next-line no-alert
-          onClose: () => alert('Close')
+          children: 'Toast Stack'
         })
       }
     >

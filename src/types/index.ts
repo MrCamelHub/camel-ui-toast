@@ -4,7 +4,7 @@ import type { CSSValue, GenericComponentProps } from '@mrcamelhub/camel-ui';
 
 export interface ToastProps {
   open?: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   bottom?: CSSValue;
   edgeSpacing?: number;
   autoHideDuration?: number;

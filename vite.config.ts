@@ -54,6 +54,7 @@ export default defineConfig(({ command }) => {
       rollupOptions: {
         external: [...Object.keys(pkg.peerDependencies), /@emotion/g],
         output: {
+          exports: 'named',
           interop: 'auto'
         }
       }
