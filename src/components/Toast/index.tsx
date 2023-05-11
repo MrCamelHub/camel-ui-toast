@@ -1,12 +1,11 @@
-import type { PropsWithChildren } from 'react';
-import { forwardRef, useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 import createUniqueId from '@utils/createUniqId';
 import ToastStatesContext from '@context/ToastStatesContext';
 
-import type { ToastProps } from '@types';
+import { ToastComponentProps } from '@types';
 
-const Toast = forwardRef<HTMLDivElement, PropsWithChildren<ToastProps>>(function Toast({
+function Toast({
   children,
   open,
   bottom = 100,
@@ -14,7 +13,7 @@ const Toast = forwardRef<HTMLDivElement, PropsWithChildren<ToastProps>>(function
   autoHideDuration = 2000,
   transitionDuration = 225,
   ...props
-}) {
+}: ToastComponentProps) {
   const [toastStates = [], setToastStates] = useContext(ToastStatesContext);
 
   const [id, setId] = useState(0);
@@ -89,6 +88,6 @@ const Toast = forwardRef<HTMLDivElement, PropsWithChildren<ToastProps>>(function
   }, [hasToastState]);
 
   return null;
-});
+}
 
 export default Toast;

@@ -7,32 +7,38 @@ import react from '@vitejs/plugin-react-swc';
 import pkg from './package.json';
 
 export default defineConfig(({ command }) => {
+  const alias = [
+    { find: '@', replacement: path.resolve(__dirname, 'src') },
+    {
+      find: '@components',
+      replacement: path.resolve(__dirname, 'src/components')
+    },
+    {
+      find: '@context',
+      replacement: path.resolve(__dirname, 'src/context')
+    },
+    {
+      find: '@hooks',
+      replacement: path.resolve(__dirname, 'src/hooks')
+    },
+    {
+      find: '@provider',
+      replacement: path.resolve(__dirname, 'src/provider')
+    },
+    {
+      find: '@types',
+      replacement: path.resolve(__dirname, 'src/types')
+    },
+    {
+      find: '@utils',
+      replacement: path.resolve(__dirname, 'src/utils')
+    }
+  ];
+
   if (command === 'serve') {
     return {
       resolve: {
-        alias: [
-          { find: '@', replacement: path.resolve(__dirname, 'src') },
-          {
-            find: '@components',
-            replacement: path.resolve(__dirname, 'src/components')
-          },
-          {
-            find: '@context',
-            replacement: path.resolve(__dirname, 'src/context')
-          },
-          {
-            find: '@provider',
-            replacement: path.resolve(__dirname, 'src/provider')
-          },
-          {
-            find: '@types',
-            replacement: path.resolve(__dirname, 'src/types')
-          },
-          {
-            find: '@utils',
-            replacement: path.resolve(__dirname, 'src/utils')
-          }
-        ]
+        alias
       }
     };
   }
@@ -60,29 +66,7 @@ export default defineConfig(({ command }) => {
       dts({ insertTypesEntry: true })
     ],
     resolve: {
-      alias: [
-        { find: '@', replacement: path.resolve(__dirname, 'src') },
-        {
-          find: '@components',
-          replacement: path.resolve(__dirname, 'src/components')
-        },
-        {
-          find: '@context',
-          replacement: path.resolve(__dirname, 'src/context')
-        },
-        {
-          find: '@provider',
-          replacement: path.resolve(__dirname, 'src/provider')
-        },
-        {
-          find: '@types',
-          replacement: path.resolve(__dirname, 'src/types')
-        },
-        {
-          find: '@utils',
-          replacement: path.resolve(__dirname, 'src/utils')
-        }
-      ]
+      alias
     },
     define: {
       'process.env.NODE_ENV': '"production"'
