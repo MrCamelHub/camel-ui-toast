@@ -1,11 +1,13 @@
 {
   "name": "@mrcamelhub/camel-ui-toast",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Camel UI Toast Component",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "repository": "https://github.com/MrCamelHub/camel-ui-toast",
   "author": "mrcamel <admin@mrcamel.co.kr>",
   "license": "MIT",
