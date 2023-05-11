@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "description": "Camel UI Toast Component",
   "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
+  "files": ["dist"],
   "repository": "https://github.com/MrCamelHub/camel-ui-toast",
   "author": "mrcamel <admin@mrcamel.co.kr>",
   "license": "MIT",
   "private": false,
   "sideEffects": false,
-  "keywords": [],
   "scripts": {
     "build": "rm -rf dist && vite build",
     "storybook": "storybook dev -p 6006",
@@ -19,7 +20,7 @@
   "devDependencies": {
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
-    "@mrcamelhub/camel-ui": "^0.1.64",
+    "@mrcamelhub/camel-ui": "^0.1.65",
     "@storybook/addon-essentials": "^7.0.10",
     "@storybook/react": "^7.0.10",
     "@storybook/react-vite": "^7.0.10",
@@ -53,7 +54,7 @@
   "peerDependencies": {
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
-    "@mrcamelhub/camel-ui": "^0.1.64",
+    "@mrcamelhub/camel-ui": "^0.1.65",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
   }

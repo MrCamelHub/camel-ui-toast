@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@emotion/react': ^11.10.8
   '@emotion/styled': ^11.10.8
-  '@mrcamelhub/camel-ui': ^0.1.64
+  '@mrcamelhub/camel-ui': ^0.1.65
   '@storybook/addon-essentials': ^7.0.10
   '@storybook/react': ^7.0.10
   '@storybook/react-vite': ^7.0.10
@@ -37,7 +37,7 @@ specifiers:
 devDependencies:
   '@emotion/react': 11.10.8_3mjolpizrsjgnt7s4ahgoveqvu
   '@emotion/styled': 11.10.8_47zspfu3r4q74llkzwrvdmry34
-  '@mrcamelhub/camel-ui': 0.1.64_6gx5gpy4mhwapmusigofr6kfpy
+  '@mrcamelhub/camel-ui': 0.1.65_6gx5gpy4mhwapmusigofr6kfpy
   '@storybook/addon-essentials': 7.0.10_biqbaboplfbrettd7655fr4n2y
   '@storybook/react': 7.0.10_ygqkwb4gg3aean7xjfdauovyqq
   '@storybook/react-vite': 7.0.10_mdr5kutgatwpsmcon4ebpxdvey
@@ -1934,8 +1934,8 @@ packages:
     resolution: {integrity: sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug==}
     dev: true
 
-  /@mrcamelhub/camel-ui/0.1.64_6gx5gpy4mhwapmusigofr6kfpy:
-    resolution: {integrity: sha512-9GNHcYhkflf9mfwaZEjJJ47eSsw6fLBEx0ZeXXLDWS1pdhd+sbv/ScPdA7t/FPcZlo6afKc7zSBLJt3GE5ENvQ==}
+  /@mrcamelhub/camel-ui/0.1.65_6gx5gpy4mhwapmusigofr6kfpy:
+    resolution: {integrity: sha512-FBnGbkkovi7FIv2yzVons44iEE0bD3GZsnQ5n846WhcniBLxxMC9gmYOC6WL1OMWDo47M1KGnlrottAeuLa7iQ==}
     peerDependencies:
       '@emotion/react': ^11.10.8
       '@emotion/styled': ^11.10.8
