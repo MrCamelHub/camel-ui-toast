@@ -8,6 +8,7 @@ export const StyledToast = styled.div<
     toastOpen: boolean;
     toastClose: boolean;
     toastHeight: number;
+    toastStackHeight: number;
     index: number;
     hasAction: boolean;
   }
@@ -15,13 +16,13 @@ export const StyledToast = styled.div<
   position: fixed;
   left: 50%;
   bottom: ${({ bottom = 0 }) => convertNumberToCSSValue(bottom)};
-  transform: ${({ index, toastHeight }) => `translate(-50%, -${(toastHeight + 8) * index}px)`};
+  transform: ${({ index, toastHeight, toastStackHeight }) =>
+    `translate(-50%, -${(toastHeight + 8) * index + toastStackHeight}px)`};
   width: ${({ edgeSpacing }) => `calc(100% - ${(edgeSpacing || 0) * 2}px)`};
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${({ hasAction }) => (hasAction ? 'space-between' : 'center')};
   gap: 8px;
-  max-height: 44px;
   padding: ${({ hasAction }) => (hasAction ? '12px' : '12px 20px')};
   border-radius: 8px;
   background-color: ${({

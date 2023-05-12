@@ -38,7 +38,8 @@ export function Default({ ...args }) {
         First Toast
       </Toast>
       <Toast {...args} open={openSecondToast} onClose={() => setOpenSecondToast(false)}>
-        Second Toast
+        <p>마케팅 수신 동의 처리 되었습니다.</p>
+        <p>(재설정: 마이 -{'>'} 해제)</p>
       </Toast>
       <Toast {...args} open={openThirdToast} onClose={() => setOpenThirdToast(false)}>
         Third Toast
@@ -66,6 +67,75 @@ export function Action({ ...args }) {
         }}
       >
         Toast With Action
+      </Toast>
+    </Flexbox>
+  );
+}
+
+export function VariableHeight({ ...args }) {
+  const [open, setOpen] = useState(false);
+  const [openTwoLineToast, setOpenTwoLineToast] = useState(false);
+  const [openThreeLineToast, setOpenThreeLineToast] = useState(false);
+  const [openFourLineToast, setOpenFourLineToast] = useState(false);
+  const [openFiveLineToast, setOpenFiveLineToast] = useState(false);
+
+  return (
+    <Flexbox gap={8}>
+      <Button variant="solid" brandColor="primary" onClick={() => setOpen(!open)}>
+        Open One Line Toast
+      </Button>
+      <Button
+        variant="solid"
+        brandColor="primary"
+        onClick={() => setOpenTwoLineToast(!openTwoLineToast)}
+      >
+        Open Two Lines Toast
+      </Button>
+      <Button
+        variant="solid"
+        brandColor="primary"
+        onClick={() => setOpenThreeLineToast(!openThreeLineToast)}
+      >
+        Open Three Lines Toast
+      </Button>
+      <Button
+        variant="solid"
+        brandColor="primary"
+        onClick={() => setOpenFourLineToast(!openFourLineToast)}
+      >
+        Open Four Lines Toast
+      </Button>
+      <Button
+        variant="solid"
+        brandColor="primary"
+        onClick={() => setOpenFiveLineToast(!openFiveLineToast)}
+      >
+        Open Five Lines Toast
+      </Button>
+      <Toast {...args} open={open} onClose={() => setOpen(false)}>
+        One Lines Toast
+      </Toast>
+      <Toast {...args} open={openTwoLineToast} onClose={() => setOpenTwoLineToast(false)}>
+        <p>Two Lines Toast</p>
+        <p>Two Lines Toast</p>
+      </Toast>
+      <Toast {...args} open={openThreeLineToast} onClose={() => setOpenThreeLineToast(false)}>
+        <p>Three Lines Toast</p>
+        <p>Three Lines Toast</p>
+        <p>Three Lines Toast</p>
+      </Toast>
+      <Toast {...args} open={openFourLineToast} onClose={() => setOpenFourLineToast(false)}>
+        <p>Four Lines Toast</p>
+        <p>Four Lines Toast</p>
+        <p>Four Lines Toast</p>
+        <p>Four Lines Toast</p>
+      </Toast>
+      <Toast {...args} open={openFiveLineToast} onClose={() => setOpenFiveLineToast(false)}>
+        <p>Five Lines Toast</p>
+        <p>Five Lines Toast</p>
+        <p>Five Lines Toast</p>
+        <p>Five Lines Toast</p>
+        <p>Five Lines Toast</p>
       </Toast>
     </Flexbox>
   );

@@ -11,6 +11,25 @@ function ToastRenderProvider() {
   const [isMounted, setIsMounted] = useState(false);
 
   const toastRootPortalRef = useRef<HTMLDivElement | null>(null);
+  const toastMinHeightRef = useRef(44);
+  const toastRefs = useRef<HTMLDivElement[]>([]);
+  const toastStackHeightMetric = useRef<[number, number]>([0, 0]);
+
+  const setToastStackHeight = (newIndex: number, newHeight: number) => () => {
+    if (!newIndex) {
+      toastStackHeightMetric.current = [0, 0];
+    }
+
+    if (newHeight) {
+      toastStackHeightMetric.current = [newIndex, toastStackHeightMetric.current[1] + newHeight];
+    }
+
+    if (toastStackHeightMetric.current[0] <= newIndex) {
+      return toastStackHeightMetric.current[1];
+    }
+
+    return 0;
+  };
 
   useEffect(() => {
     if (toastStates.length) {
@@ -45,8 +64,9 @@ function ToastRenderProvider() {
 
     toastStates
       .filter(({ close }) => close)
-      .forEach(({ id, props: { transitionDuration, onClose } }) =>
+      .forEach(({ id, props: { transitionDuration, onClose } }, index) =>
         setTimeout(() => {
+          toastRefs.current = toastRefs.current.filter((_, refIndex) => index !== refIndex);
           setToastStates((prevToastStates) =>
             prevToastStates.filter(({ id: prevToastStateId }) => prevToastStateId !== id)
           );
@@ -61,19 +81,29 @@ function ToastRenderProvider() {
     toastStates.map(
       ({ id, open, close, props: { children, customStyle, bottom, action, ...props } }, index) => (
         <StyledToast
-          key={`toast-${id}`}
           {...props}
+          key={`toast-${id}`}
+          ref={(ref) => {
+            if (ref) toastRefs.current[index] = ref;
+          }}
           toastOpen={open}
           toastClose={close}
           toastHeight={Number(
-            String(customStyle?.height || customStyle?.minHeight || 44).replace(/\D/g, '')
+            String(
+              customStyle?.height || customStyle?.minHeight || toastMinHeightRef.current
+            ).replace(/\D/g, '')
           )}
+          toastStackHeight={setToastStackHeight(
+            index,
+            (toastRefs.current[index - 1]?.clientHeight || toastMinHeightRef.current) -
+              toastMinHeightRef.current
+          )()}
           index={index}
           bottom={toastStates[0]?.props?.bottom || bottom}
           hasAction={!!action}
           css={customStyle}
         >
-          <Typography weight="medium" color="uiWhite" noWrap>
+          <Typography weight="medium" color="uiWhite" noWrap={!!action}>
             {children}
           </Typography>
           {action && (
