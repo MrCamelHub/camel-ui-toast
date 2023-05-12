@@ -22,8 +22,8 @@ function Toast({
   const initializedRef = useRef(false);
 
   useEffect(() => {
-    if (open && !id) setId(createUniqueId(`toast-${toastStates.length}`));
-  }, [open, toastStates, id]);
+    if (open && !id) setId(createUniqueId('toast'));
+  }, [open, id]);
 
   useEffect(() => {
     if (open && setToastStates && id && !initializedRef.current) {

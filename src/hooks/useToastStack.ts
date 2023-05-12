@@ -2,12 +2,13 @@ import { useContext } from 'react';
 import type { PropsWithChildren } from 'react';
 
 import createUniqueId from '@utils/createUniqId';
+import type { GenericComponentProps } from '@mrcamelhub/camel-ui';
 import ToastStatesContext from '@context/ToastStatesContext';
 
 import type { ToastProps } from '@types';
 
 export default function useToastStack() {
-  const [toastStates = [], setToastStates] = useContext(ToastStatesContext);
+  const [, setToastStates] = useContext(ToastStatesContext);
 
   return ({
     children,
@@ -16,10 +17,10 @@ export default function useToastStack() {
     autoHideDuration = 2000,
     transitionDuration = 225,
     ...props
-  }: PropsWithChildren<ToastProps>) => {
+  }: GenericComponentProps<PropsWithChildren<ToastProps>>) => {
     if (!setToastStates) return;
 
-    const id = createUniqueId(`toast-${toastStates.length}`);
+    const id = createUniqueId('toast');
 
     setToastStates((prevState) => {
       return prevState.concat({
