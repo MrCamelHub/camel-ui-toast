@@ -38,8 +38,7 @@ export function Default({ ...args }) {
         First Toast
       </Toast>
       <Toast {...args} open={openSecondToast} onClose={() => setOpenSecondToast(false)}>
-        <p>마케팅 수신 동의 처리 되었습니다.</p>
-        <p>(재설정: 마이 -{'>'} 해제)</p>
+        Second Toast
       </Toast>
       <Toast {...args} open={openThirdToast} onClose={() => setOpenThirdToast(false)}>
         Third Toast

@@ -15,6 +15,12 @@ function ToastRenderProvider() {
   const toastRefs = useRef<HTMLDivElement[]>([]);
   const toastStackHeightMetric = useRef<[number, number]>([0, 0]);
 
+  const setToastRef = (index: number) => (ref: HTMLDivElement | null) => {
+    if (!ref) return;
+
+    toastRefs.current[index] = ref;
+  };
+
   const setToastStackHeight = (newIndex: number, newHeight: number) => () => {
     if (!newIndex) {
       toastStackHeightMetric.current = [0, 0];
@@ -83,9 +89,7 @@ function ToastRenderProvider() {
         <StyledToast
           {...props}
           key={`toast-${id}`}
-          ref={(ref) => {
-            if (ref) toastRefs.current[index] = ref;
-          }}
+          ref={setToastRef(index)}
           toastOpen={open}
           toastClose={close}
           toastHeight={Number(

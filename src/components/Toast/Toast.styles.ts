@@ -17,7 +17,7 @@ export const StyledToast = styled.div<
   left: 50%;
   bottom: ${({ bottom = 0 }) => convertNumberToCSSValue(bottom)};
   transform: ${({ index, toastHeight, toastStackHeight }) =>
-    `translate(-50%, -${(toastHeight + 8) * index + toastStackHeight}px)`};
+    `translate(-50%, -${(toastHeight + 8) * index + toastStackHeight}px) scale(0.7, 0.7)`};
   width: ${({ edgeSpacing }) => `calc(100% - ${(edgeSpacing || 0) * 2}px)`};
   display: flex;
   align-items: center;
@@ -45,17 +45,23 @@ export const StyledToast = styled.div<
         }
       : {}}
 
-  ${({ toastOpen }): CSSObject =>
+  ${({ toastOpen, index, toastHeight, toastStackHeight }): CSSObject =>
     toastOpen
       ? {
           visibility: 'visible',
-          opacity: 1
+          opacity: 1,
+          transform: `translate(-50%, -${
+            (toastHeight + 8) * index + toastStackHeight
+          }px) scale(1, 1)`
         }
       : {}}
-  ${({ toastClose }): CSSObject =>
+  ${({ toastClose, index, toastHeight, toastStackHeight }): CSSObject =>
     toastClose
       ? {
-          opacity: 0
+          opacity: 0,
+          transform: `translate(-50%, -${
+            (toastHeight + 8) * index + toastStackHeight
+          }px) scale(0.7, 0.7)`
         }
       : {}}
 `;
