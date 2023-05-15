@@ -8,6 +8,7 @@ export const StyledToast = styled.div<
     toastOpen: boolean;
     toastClose: boolean;
     toastHeight: number;
+    toastMinHeight: number;
     toastStackHeight: number;
     index: number;
     hasAction: boolean;
@@ -19,6 +20,7 @@ export const StyledToast = styled.div<
   transform: ${({ index, toastHeight, toastStackHeight }) =>
     `translate(-50%, -${(toastHeight + 8) * index + toastStackHeight}px) scale(0.7, 0.7)`};
   width: ${({ edgeSpacing }) => `calc(100% - ${(edgeSpacing || 0) * 2}px)`};
+  min-height: ${({ toastMinHeight }) => toastMinHeight}px;
   display: flex;
   align-items: center;
   justify-content: ${({ hasAction }) => (hasAction ? 'space-between' : 'center')};

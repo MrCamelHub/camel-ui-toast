@@ -9,32 +9,16 @@ function ToastRenderProvider() {
   const [toastStates = [], setToastStates] = useContext(ToastStatesContext);
 
   const [isMounted, setIsMounted] = useState(false);
+  const [toastStackHeightMetrics, setToastStackHeightMetrics] = useState<number[][]>([]);
 
   const toastRootPortalRef = useRef<HTMLDivElement | null>(null);
   const toastMinHeightRef = useRef(44);
   const toastRefs = useRef<HTMLDivElement[]>([]);
-  const toastStackHeightMetric = useRef<[number, number]>([0, 0]);
 
   const setToastRef = (index: number) => (ref: HTMLDivElement | null) => {
     if (!ref) return;
 
     toastRefs.current[index] = ref;
-  };
-
-  const setToastStackHeight = (newIndex: number, newHeight: number) => () => {
-    if (!newIndex) {
-      toastStackHeightMetric.current = [0, 0];
-    }
-
-    if (newHeight) {
-      toastStackHeightMetric.current = [newIndex, toastStackHeightMetric.current[1] + newHeight];
-    }
-
-    if (toastStackHeightMetric.current[0] <= newIndex) {
-      return toastStackHeightMetric.current[1];
-    }
-
-    return 0;
   };
 
   useEffect(() => {
@@ -63,6 +47,30 @@ function ToastRenderProvider() {
       toastRootPortalRef.current = null;
       setIsMounted(false);
     }
+  }, [toastStates]);
+
+  useEffect(() => {
+    if (!toastRefs.current.length || toastRefs.current.length === 1) {
+      setToastStackHeightMetrics([]);
+      return;
+    }
+
+    toastRefs.current.forEach((toastRef, index) => {
+      if (!index || !toastRefs.current[index - 1]) return;
+
+      const { clientHeight } = toastRefs.current[index - 1];
+
+      if (clientHeight - toastMinHeightRef.current > 0) {
+        setToastStackHeightMetrics((prevState) => [
+          ...prevState.filter(([prevIndex, _]) => prevIndex !== index),
+          [index, clientHeight - toastMinHeightRef.current]
+        ]);
+      } else {
+        setToastStackHeightMetrics((prevState) =>
+          prevState.filter(([prevIndex, _]) => prevIndex !== index)
+        );
+      }
+    });
   }, [toastStates]);
 
   useEffect(() => {
@@ -97,11 +105,10 @@ function ToastRenderProvider() {
               customStyle?.height || customStyle?.minHeight || toastMinHeightRef.current
             ).replace(/\D/g, '')
           )}
-          toastStackHeight={setToastStackHeight(
-            index,
-            (toastRefs.current[index - 1]?.clientHeight || toastMinHeightRef.current) -
-              toastMinHeightRef.current
-          )()}
+          toastMinHeight={toastMinHeightRef.current}
+          toastStackHeight={toastStackHeightMetrics
+            .filter(([stackIndex, _]) => stackIndex <= index)
+            .reduce((a, b) => a + b[1], 0)}
           index={index}
           bottom={toastStates[0]?.props?.bottom || bottom}
           hasAction={!!action}
