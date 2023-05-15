@@ -61,8 +61,7 @@ export default defineConfig(({ command }) => {
     },
     plugins: [
       react({
-        jsxImportSource: '@emotion/react',
-        plugins: [['@swc/plugin-emotion', {}]]
+        jsxImportSource: '@emotion/react'
       }),
       dts({ insertTypesEntry: true })
     ],
