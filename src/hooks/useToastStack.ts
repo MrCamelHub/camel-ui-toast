@@ -35,7 +35,7 @@ export default function useToastStack() {
                 open: prevToastState.id === id ? true : prevToastState.open
               }))
             ),
-          edgeSpacing
+          100
         ),
         closeTimer: setTimeout(
           () =>

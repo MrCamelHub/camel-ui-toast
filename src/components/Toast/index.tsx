@@ -41,7 +41,7 @@ function Toast({
                   open: prevToastState.id === id ? true : prevToastState.open
                 }))
               ),
-            transitionDuration
+            100
           ),
           closeTimer: setTimeout(
             () =>
