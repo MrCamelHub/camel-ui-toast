@@ -8,7 +8,7 @@ import { ToastComponentProps } from '@types';
 function Toast({
   children,
   open,
-  bottom = 100,
+  bottom = 80,
   edgeSpacing = 20,
   autoHideDuration = 2000,
   transitionDuration = 225,

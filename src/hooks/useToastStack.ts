@@ -12,7 +12,7 @@ export default function useToastStack() {
 
   return ({
     children,
-    bottom = 100,
+    bottom = 80,
     edgeSpacing = 20,
     autoHideDuration = 2000,
     transitionDuration = 225,
