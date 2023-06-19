@@ -1,6 +1,5 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useId, useRef, useState } from 'react';
 
-import createUniqueId from '@utils/createUniqId';
 import ToastStatesContext from '@context/ToastStatesContext';
 
 import { ToastComponentProps } from '@types';
@@ -14,16 +13,13 @@ function Toast({
   transitionDuration = 225,
   ...props
 }: ToastComponentProps) {
+  const id = useId();
+
   const [toastStates = [], setToastStates] = useContext(ToastStatesContext);
 
-  const [id, setId] = useState(0);
   const [hasToastState, setHasToastState] = useState(false);
 
   const initializedRef = useRef(false);
-
-  useEffect(() => {
-    if (open && !id) setId(createUniqueId('toast'));
-  }, [open, id]);
 
   useEffect(() => {
     if (open && setToastStates && id && !initializedRef.current) {

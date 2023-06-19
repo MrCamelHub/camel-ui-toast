@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import { useState } from 'react';
 
-import ToastRenderProvider from '@provider/ToastRenderProvider';
+import ToastRootProvider from '@provider/ToastRootProvider';
 import ToastStatesContext from '@context/ToastStatesContext';
 
 import type { ToastState } from '@types';
@@ -12,7 +12,7 @@ function ToastProvider({ children }: PropsWithChildren) {
   return (
     <ToastStatesContext.Provider value={value}>
       {children}
-      <ToastRenderProvider />
+      <ToastRootProvider />
     </ToastStatesContext.Provider>
   );
 }

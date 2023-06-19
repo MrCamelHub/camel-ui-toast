@@ -20,7 +20,7 @@ export type ToastComponentProps = ToastProps &
   GenericComponentProps<Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>>;
 
 export interface ToastState {
-  id: number;
+  id: number | string;
   open: boolean;
   close: boolean;
   openTimer: ReturnType<typeof setTimeout>;

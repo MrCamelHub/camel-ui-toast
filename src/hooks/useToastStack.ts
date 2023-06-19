@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useId } from 'react';
 import type { PropsWithChildren } from 'react';
 
 import createUniqueId from '@utils/createUniqId';
@@ -8,6 +8,7 @@ import ToastStatesContext from '@context/ToastStatesContext';
 import type { ToastProps } from '@types';
 
 export default function useToastStack() {
+  const uniqueId = useId();
   const [, setToastStates] = useContext(ToastStatesContext);
 
   return ({
@@ -20,7 +21,7 @@ export default function useToastStack() {
   }: GenericComponentProps<PropsWithChildren<ToastProps>>) => {
     if (!setToastStates) return;
 
-    const id = createUniqueId('toast');
+    const id = createUniqueId('toast') + uniqueId;
 
     setToastStates((prevState) => {
       return prevState.concat({

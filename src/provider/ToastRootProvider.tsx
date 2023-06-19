@@ -5,7 +5,7 @@ import { Typography } from '@mrcamelhub/camel-ui';
 import ToastStatesContext from '@context/ToastStatesContext';
 import { StyledToast } from '@components/Toast/Toast.styles';
 
-function ToastRenderProvider() {
+function ToastRootProvider() {
   const [toastStates = [], setToastStates] = useContext(ToastStatesContext);
 
   const [isMounted, setIsMounted] = useState(false);
@@ -137,4 +137,4 @@ function ToastRenderProvider() {
   );
 }
 
-export default ToastRenderProvider;
+export default ToastRootProvider;
